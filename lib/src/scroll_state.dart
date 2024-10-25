@@ -7,14 +7,16 @@ const kDesktopPhysics = NeverScrollableScrollPhysics();
 class ScrollState with ChangeNotifier {
   final ScrollController controller = ScrollController();
   ScrollPhysics physics = kDesktopPhysics;
-  double futurePosition = 0;
 
   final ScrollPhysics mobilePhysics;
   final int durationMS;
+  final double changeFuturePosition;
 
-  ScrollState(this.mobilePhysics, this.durationMS);
+  ScrollState(this.mobilePhysics, this.durationMS, this.changeFuturePosition);
 
   void handleDesktopScroll(PointerSignalEvent event) {
+    double futurePosition = changeFuturePosition > 0 ? changeFuturePosition : 0;
+
     // Ensure desktop physics is being used.
     if (physics == kMobilePhysics) {
       physics = kDesktopPhysics;
