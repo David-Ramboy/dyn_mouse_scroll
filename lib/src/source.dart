@@ -7,21 +7,21 @@ class DynMouseScroll extends StatelessWidget {
   final ScrollPhysics mobilePhysics;
   final int durationMS;
   final Function(BuildContext, ScrollController, ScrollPhysics) builder;
-  final double? changeFuturePosition;
+  final double changeFuturePosition;
 
   const DynMouseScroll({
     super.key,
     this.mobilePhysics = kMobilePhysics,
     this.durationMS = 200,
     required this.builder,
-    this.changeFuturePosition,
+    required this.changeFuturePosition,
   });
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<ScrollState>(
         create: (context) =>
-            ScrollState(mobilePhysics, durationMS, changeFuturePosition!),
+            ScrollState(mobilePhysics, durationMS, changeFuturePosition),
         builder: (context, _) {
           final scrollState = context.read<ScrollState>();
           final controller = scrollState.controller;
